@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 
+export interface ISortOption {
+  value: string;
+  label: string;
+}
 interface DropdownProps {
-  options: string[];
+  options: ISortOption[];
   onSelect: (value: string) => void;
 }
 
@@ -13,9 +17,9 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (option: string) => {
-    setSelectedOption(option);
-    onSelect(option);
+  const handleSelect = (option: ISortOption) => {
+    setSelectedOption(option.label);
+    onSelect(option.value);
     setIsOpen(false);
   };
 
@@ -57,7 +61,7 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
                 onClick={() => handleSelect(option)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
               >
-                {option}
+                {option.label}
               </button>
             ))}
           </div>

@@ -13,6 +13,11 @@ const Search: React.FC<ISearchProps> = ({ placeholder, onSearch }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const handleSearch = () => {
     onSearch(searchTerm);
@@ -24,6 +29,7 @@ const Search: React.FC<ISearchProps> = ({ placeholder, onSearch }) => {
         value={searchTerm}
         onChange={handleInputChange}
         placeholder={placeholder}
+        onKeyDown={handleKeyPress}
       />
       <Button onClick={handleSearch} label="Search" />
     </div>
